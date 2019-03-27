@@ -1,0 +1,17 @@
+- name: Create letsencrypt user
+  user:
+    name: letsencrypt
+    shell: /bin/false
+    append: yes
+
+- import_role:
+    name: geerlingguy.certbot
+  vars:
+    certbot_auto_renew_user: letsencrypt
+    certbot_admin_email: "{{ letsencrypt_admin_email }}"
+    certbot_create_if_missing: yes
+    certbot_create_standalone_stop_services:
+      - nginx
+    certbot_certs:
+      - domains: "{{ letsencrypt_domains }}"
+    certbot_auto_renew_options: "--quiet --no-self-upgrade --pre-hook 'systemctl stop nginx' --post-hook 'systemctl start nginx'"

@@ -1,0 +1,15 @@
+---
+dependencies:
+  - geerlingguy.certbot
+
+galaxy_info:
+  role_name: letsencrypt
+  author: mmcnl
+  description: "create and renew letsencrypt certificates"
+  license: MIT
+  min_ansible_version: 2.4
+  platforms:
+    - name: Ubuntu
+      versions:
+        - bionic
+  galaxy_tags: []
