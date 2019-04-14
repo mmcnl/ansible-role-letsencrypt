@@ -3,6 +3,7 @@
 /var/log/letsencrypt/letsencrypt.log {
     copy
     daily
-    rotate 14
+    rotate 30
+    maxage 30
     missingok
 }
