@@ -1,0 +1,8 @@
+# {{ ansible_managed }}
+
+/var/log/letsencrypt/letsencrypt.log {
+    copy
+    daily
+    rotate 14
+    missingok
+}

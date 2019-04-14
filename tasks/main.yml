@@ -7,3 +7,9 @@
     certbot_certs:
       - domains: "{{ letsencrypt_domains }}"
     certbot_auto_renew_options: "--quiet --no-self-upgrade --pre-hook 'systemctl stop nginx' --post-hook 'systemctl start nginx'"
+
+- name: set logrotation
+  template:
+    src: letsencrypt-logrotate.j2
+    dest: /etc/logrotate.d/letsencrypt
+    mode: 0644
