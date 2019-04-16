@@ -1,6 +1,5 @@
 ---
-dependencies:
-  - geerlingguy.certbot
+dependencies: []
 
 galaxy_info:
   role_name: letsencrypt
