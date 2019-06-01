@@ -1,15 +1,22 @@
+---
 - import_role:
     name: geerlingguy.certbot
   vars:
+    certbot_auto_renew: true
     certbot_auto_renew_user: root
     certbot_admin_email: "{{ letsencrypt_admin_email }}"
     certbot_create_if_missing: yes
     certbot_certs:
       - domains: "{{ letsencrypt_domains }}"
-    certbot_auto_renew_options: "--quiet --no-self-upgrade --pre-hook 'systemctl stop nginx' --post-hook 'systemctl start nginx'"
 
-- name: set logrotation
+# prefer the cron job installed above, over which we have more control
+- name: remove renewal job installed by certbot apt package
+  file:
+    path: /etc/cron.d/certbot
+    state: absent
+
+- name: update logrotation script provided by certbot apt package
   template:
-    src: letsencrypt-logrotate.j2
-    dest: /etc/logrotate.d/letsencrypt
+    src: certbot-logrotate.j2
+    dest: /etc/logrotate.d/certbot
     mode: 0644
