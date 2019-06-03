@@ -1,4 +1,10 @@
 ---
+- name: Ensure required vars for the geerlingguy.certbot role are defined
+  assert:
+    that:
+      - certbot_auto_renew_options is defined
+      - certbot_create_standalone_stop_services is defined
+
 - import_role:
     name: geerlingguy.certbot
   vars:
@@ -9,7 +15,8 @@
     certbot_certs:
       - domains: "{{ letsencrypt_domains }}"
 
-# prefer the cron job installed above, over which we have more control
+# prefer the cron job installed above by the geerlingguy.certbot role, over
+# which we have more control (through the `certbot_auto_renew_options` var)
 - name: remove renewal job installed by certbot apt package
   file:
     path: /etc/cron.d/certbot
