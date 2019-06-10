@@ -1,15 +1,12 @@
 ---
-- name: Ensure required vars for the geerlingguy.certbot role are defined
-  assert:
-    that:
-      - certbot_auto_renew_options is defined
-      - certbot_create_standalone_stop_services is defined
-
 - import_role:
     name: geerlingguy.certbot
   vars:
     certbot_auto_renew: true
     certbot_auto_renew_user: root
+    certbot_create_standalone_stop_services: "{{ letsencrypt_create_standalone_stop_services }}"
+    certbot_auto_renew_options: "{{ letsencrypt_auto_renew_options }}"
+    certbot_auto_renew_hour: "{{ letsencrypt_auto_renew_hour }}"
     certbot_admin_email: "{{ letsencrypt_admin_email }}"
     certbot_create_if_missing: yes
     certbot_certs:
