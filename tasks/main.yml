@@ -5,6 +5,12 @@
     certbot_auto_renew: true
     certbot_auto_renew_user: root
     certbot_create_standalone_stop_services: "{{ letsencrypt_create_standalone_stop_services }}"
+    certbot_create_command: >-
+      {{ certbot_script }} certonly
+      {{ '--test-cert' if letsencrypt_use_test_cert else '' }}
+      --standalone --noninteractive --agree-tos
+      --email {{ cert_item.email | default(certbot_admin_email) }}
+      -d {{ cert_item.domains | join(',') }}
     certbot_auto_renew_options: "{{ letsencrypt_auto_renew_options }}"
     certbot_auto_renew_hour: "{{ letsencrypt_auto_renew_hour }}"
     certbot_admin_email: "{{ letsencrypt_admin_email }}"
