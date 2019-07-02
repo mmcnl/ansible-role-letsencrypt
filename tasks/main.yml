@@ -10,6 +10,7 @@
       {{ '--test-cert' if letsencrypt_use_test_cert else '' }}
       --standalone --noninteractive --agree-tos
       --email {{ cert_item.email | default(certbot_admin_email) }}
+      --cert-name {{ cert_item.domains | first }}
       -d {{ cert_item.domains | join(',') }}
     certbot_auto_renew_options: "{{ letsencrypt_auto_renew_options }}"
     certbot_auto_renew_hour: "{{ letsencrypt_auto_renew_hour }}"
