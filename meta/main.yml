@@ -3,11 +3,10 @@ dependencies:
   - {role: "geerlingguy.certbot", when: false} # use import_role later
 
 galaxy_info:
-  role_name: letsencrypt
   author: mmcnl
-  description: "create and renew letsencrypt certificates"
+  description: create and renew letsencrypt certificates
   license: MIT
-  min_ansible_version: 2.4
+  min_ansible_version: 2.8
   platforms:
     - name: Ubuntu
       versions:
