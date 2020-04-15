@@ -1,9 +1,0 @@
-# {{ ansible_managed }}
-
-/var/log/letsencrypt/letsencrypt.log {
-    copy
-    daily
-    rotate 30
-    maxage 30
-    missingok
-}

@@ -1,0 +1,7 @@
+#!/bin/bash
+# -*- mode: shell-script -*-
+# {{ ansible_managed }}
+
+set -o errexit -o nounset
+
+/usr/bin/find {{ letsencrypt_log_dir }} -mtime +{{ letsencrypt_log_retention_days }} -delete

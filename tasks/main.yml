@@ -26,8 +26,15 @@
     path: /etc/cron.d/certbot
     state: absent
 
-- name: update logrotation script provided by certbot apt package
+- name: remove logrotation script provided by certbot apt package
+  file:
+    path: /etc/logrotate.d/certbot
+    state: absent
+
+# built in letsencrypt log management is not very functional (eg
+# http://www.sweetapplepress.com/healthcareguide.html) , so just use our own
+- name: install letsencrypt log cleanup script
   template:
-    src: certbot-logrotate.j2
-    dest: /etc/logrotate.d/certbot
-    mode: 0644
+    src: letsencrypt_log_cleanup.j2
+    dest: /etc/cron.daily/letsencrypt_log_cleanup
+    mode: 0744

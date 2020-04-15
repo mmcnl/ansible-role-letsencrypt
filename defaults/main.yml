@@ -1,0 +1,3 @@
+---
+letsencrypt_log_dir: /var/log/letsencrypt
+letsencrypt_log_retention_days: 100
